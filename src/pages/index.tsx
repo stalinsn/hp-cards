@@ -4,6 +4,7 @@ import CharacterList from '@/components/CharacterList';
 import CategoryFilter from '@/components/CategoryFilter';
 import SearchBar from '@/components/SearchBar';
 import BackToTop from '@/components/BackToTop';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 interface Personagem {
   id?: string;
   nome?: string;
@@ -124,6 +125,7 @@ const HomePage: React.FC = () => {
         onPageChange={handlePageChange}
       />
       <BackToTop />
+      <SpeedInsights/>
     </div>
   );
 };

@@ -35,6 +35,7 @@
     "@graphql-tools/executor-graphql-ws": "^1.2.0",
     "@graphql-tools/executor-legacy-ws": "^1.1.0",
     "@graphql-tools/url-loader": "^8.0.2",
+    "@vercel/speed-insights": "^1.0.12",
     "axios": "^1.6.0",
     "graphql": "^16.6.0",
     "graphql-config": "^5.1.2",
