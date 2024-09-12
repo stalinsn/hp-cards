@@ -1,0 +1,78 @@
+// src/styles/_design-system.scss
+
+// **Paleta de Cores**
+$color-gryffindor: #7f0909;
+$color-slytherin: #1a472a;
+$color-hufflepuff: #ecb939;
+$color-ravenclaw: #0e1a40;
+$color-no-house: #666666;
+
+$color-gryffindor-hover: #9b1d1d;
+$color-slytherin-hover: #2a6241;
+$color-hufflepuff-hover: #f5d87f;
+$color-ravenclaw-hover: #1e3478;
+$color-no-house-hover: #888888;
+
+// **Cores de Texto e Fundo**
+$color-text-light: #ffffff;
+$color-text-dark: #000000;
+$color-background-light: #f0f0f0;
+$color-background-dark: #171717;
+$primary-color: #000000;
+$primary-hover-color: #000000;
+$color-muted: #FFFFFF;
+
+// **Cor de Placeholder**
+$color-placeholder: #f0f0f0; // Adiciona a cor de placeholder
+
+// **largura do sistema** 
+$max-width: 1300px;
+
+// **Tipografia**
+$font-family-primary: 'Arial', sans-serif;
+$font-size-base: 16px;
+$font-size-small: 14px;
+$font-size-large: 18px;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+// **Espaçamento**
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// **Bordas e Radius**
+$border-radius-small: 4px;
+$border-radius-medium: 8px;
+$border-radius-large: 16px;
+
+// **Transições**
+$transition-default: all 0.3s ease;
+
+// **Sombras**
+$shadow-light: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+$shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-heavy: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+// **Funções de Utilidade**
+@function get-house-color($house) {
+  @return map-get((
+    'gryffindor': $color-gryffindor,
+    'slytherin': $color-slytherin,
+    'hufflepuff': $color-hufflepuff,
+    'ravenclaw': $color-ravenclaw,
+    'noHouse': $color-no-house
+  ), $house);
+}
+
+@function get-house-hover-color($house) {
+  @return map-get((
+    'gryffindor': $color-gryffindor-hover,
+    'slytherin': $color-slytherin-hover,
+    'hufflepuff': $color-hufflepuff-hover,
+    'ravenclaw': $color-ravenclaw-hover,
+    'noHouse': $color-no-house-hover
+  ), $house);
+}

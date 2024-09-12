@@ -1,0 +1,143 @@
+@import 'design-system';
+
+// Estilos da lista de personagens
+.container .character-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $spacing-lg; 
+}
+
+// Estilos do card de personagem
+.container .character-card {
+  width: 100%;
+  max-width: 300px;
+  height: 500px;
+  perspective: 1000px; // Define a perspectiva para o efeito de flip
+  cursor: pointer;
+  position: relative;
+  margin: $spacing-md; 
+  border-radius: $border-radius-small;
+  box-shadow: $shadow-medium;
+}
+// Estilos do container interno do card para o efeito de flip
+.container .character-card .card-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d; // Mantém a perspectiva 3D
+  transition: transform 0.6s ease; // Transição suave de 0.6s
+  position: relative;
+  border-radius: $border-radius-small;
+  // overflow: hidden; // Garante que o conteúdo não transborde
+}
+
+// Estilos das faces do card
+.container .character-card .card-front,
+.container .character-card .card-back {
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; // Oculta o lado inverso durante o giro
+  position: absolute; // Garante que o flip funcione
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: $spacing-md;
+  border-radius: $border-radius-small;
+}
+
+// Estilos específicos para a face frontal e traseira do card
+.container .character-card .card-front {
+  z-index: 2;
+  transform: rotateY(0deg); // Parte da frente visível por padrão
+}
+
+.container .character-card .card-back {
+  transform: rotateY(180deg); // Parte de trás inicialmente escondida
+}
+
+// Efeito de flip no card
+.container .character-card.flipped .card-inner {
+  transform: rotateY(180deg); // Aplica a rotação ao contêiner interno ao clicar
+}
+
+// Estilos da imagem dentro do card
+.container .character-card img {
+  width: 240px;
+  max-width: 240px;
+  height: 320px;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: $color-placeholder;
+  border: 2px solid $color-text-light;
+}
+
+// Placeholder para quando a imagem não estiver disponível
+.container .character-card .image-placeholder {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="220" height="320" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="28" rx="3" stroke="%23FFFFFF" stroke-width="2"/><circle cx="12" cy="8" r="4" fill="%23000000"/><path d="M6 18c0-3 3-5 6-5s6 2 6 5" fill="%23000000"/></svg>');
+  width: 220px;
+  max-width: 220px;
+  height: 320px;
+  max-height: 320px;
+  background-size: 180px; /* Reduz o tamanho do avatar */
+  background-position: center; /* Centraliza o avatar */
+  background-repeat: no-repeat;
+  display: block;
+}
+
+// Estilos do contêiner de informações
+.container .character-card .info-container {
+  width: 100%;
+  height: 40%; // Ajusta o tamanho da área de informações
+  padding: $spacing-sm;
+  overflow-y: auto;
+  text-align: center;
+  scrollbar-width: thin;
+  scrollbar-color: $color-text-light $color-background-dark;
+}
+
+// Estilos dos textos no card
+.container .character-card h2 {
+  font-size: $font-size-base;
+  margin: $spacing-sm 0;
+}
+
+.container .character-card p {
+  font-size: $font-size-small;
+  margin: $spacing-xs 0;
+}
+
+// Estilos de Cor por Casa
+.gryffindor .card-front,
+.gryffindor .card-back {
+  background-color: $color-gryffindor;
+  color: $color-text-light;
+}
+
+.slytherin .card-front,
+.slytherin .card-back {
+  background-color: $color-slytherin;
+  color: $color-text-light;
+}
+
+.hufflepuff .card-front,
+.hufflepuff .card-back {
+  background-color: $color-hufflepuff;
+  color: $color-text-dark;
+}
+
+.ravenclaw .card-front,
+.ravenclaw .card-back {
+  background-color: $color-ravenclaw;
+  color: $color-text-light;
+}
+
+.no-house .card-front,
+.no-house .card-back {
+  background-color: $color-no-house;
+  color: $color-text-light;
+}

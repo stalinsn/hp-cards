@@ -1,0 +1,62 @@
+@import "@/styles/design-system"; // Importa o arquivo de design system com variáveis e funções
+
+// Estilos da barra de filtro
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap; // Permite que os botões de filtro ocupem múltiplas linhas em telas menores
+  justify-content: center;
+  gap: $spacing-sm; // Utiliza o espaçamento definido no design system
+  margin-bottom: $spacing-md;
+  width: 100%;
+  max-width: $max-width; // Limite máximo de largura para a barra de filtro
+  margin: 0 auto $spacing-md;
+}
+
+// Estilos dos botões de filtro
+.filter-button {
+  padding: $spacing-lg; // Aumenta o padding para melhorar a área de clique
+  border: none;
+  color: $color-text-light; // Texto claro por padrão
+  border-radius: $border-radius-small;
+  cursor: pointer;
+  transition: background-color $transition-default;
+  width: 48%; // Ocupa quase metade da linha para permitir duas colunas de botões em telas menores
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: $spacing-xs; // Adiciona um espaçamento na parte inferior dos botões
+}
+
+// Aplicação de cores para cada casa dinamicamente usando as funções do design system
+@each $house in ('gryffindor', 'slytherin', 'hufflepuff', 'ravenclaw', 'noHouse') {
+  .filter-button.#{$house} {
+    background-color: get-house-color($house); // Usa a função para definir a cor de fundo
+    color: $color-text-light; // Define a cor do texto, ajuste conforme necessário
+  }
+  .filter-button:hover.#{$house},
+  .filter-button.active.#{$house} {
+    background-color: get-house-hover-color($house); // Usa a função para definir a cor de hover
+  }
+}
+
+// Media queries para responsividade
+@media (max-width: 768px) { // Para telas menores que 768px
+  .filter-bar {
+    gap: $spacing-xs; // Reduz o gap entre os botões em telas pequenas
+  }
+
+  .filter-button {
+    width: 48%; // Ajusta a largura para permitir duas colunas
+    padding: $spacing-md; // Reduz um pouco o padding para telas menores
+  }
+}
+
+@media (min-width: 768px) { // Para telas maiores que 768px (desktop)
+  .filter-bar {
+    flex-wrap: nowrap; // Impede que os botões quebrem linha
+  }
+
+  .filter-button {
+    width: 20%; // Ocupa um quarto da barra de filtro, garantindo que todos os botões juntos ocupem 100% da largura
+    padding: $spacing-md; // Ajusta o padding conforme necessário
+  }
+}

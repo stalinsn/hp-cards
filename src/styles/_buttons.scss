@@ -1,0 +1,36 @@
+// src/styles/buttons.scss
+
+.filter-button {
+    padding: $spacing-md;
+    border: none;
+    color: $color-text-light;
+    border-radius: $border-radius-small;
+    cursor: pointer;
+    transition: $transition-default;
+    width: 25%;
+    text-align: center;
+    font-weight: $font-weight-bold;
+  }
+  
+  // Aplicação de cores para cada casa usando as variáveis do design system
+  .filter-button.grifinoria {
+    background-color: $color-gryffindor;
+  }
+  
+  .filter-button.sonserina {
+    background-color: $color-slytherin;
+  }
+  
+  .filter-button.lufalufa {
+    background-color: $color-hufflepuff;
+    color: $color-text-dark;
+  }
+  
+  .filter-button.corvinal {
+    background-color: $color-ravenclaw;
+  }
+  
+  .filter-button.no-house {
+    background-color: $color-no-house;
+  }
+  

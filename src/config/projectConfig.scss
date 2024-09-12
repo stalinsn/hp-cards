@@ -1,0 +1,24 @@
+// src/config/projectConfig.scss
+
+// Definição das cores para as casas de Hogwarts
+$colors: (
+  gryffindor: #7f0909,
+  slytherin: #1a472a,
+  hufflepuff: #ecb939,
+  ravenclaw: #0e1a40,
+  noHouse: #666666,
+  gryffindorHover: #9b1d1d,
+  slytherinHover: #2a6241,
+  hufflepuffHover: #f5d87f,
+  ravenclawHover: #1e3478,
+  noHouseHover: #888888
+);
+
+// Funções para retornar as cores dinamicamente
+@function get-house-color($house) {
+  @return map-get($colors, $house);
+}
+
+@function get-house-hover-color($house) {
+  @return map-get($colors, "#{$house}Hover");
+}

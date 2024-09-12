@@ -1,0 +1,72 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-md;
+  margin: $spacing-md 0;
+
+  // Estilos para a versão mobile
+  @media (max-width: 767px) {
+    position: fixed; // Fixa a barra de paginação no lado direito
+    bottom: 100px; // Aumenta a distância do fundo da tela para evitar o botão "Back to Top"
+    right: 20px; // Posição a partir do lado direito da tela
+    flex-direction: column; // Alinha os botões na vertical
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: $border-radius-small;
+    padding: $spacing-sm;
+    box-shadow: $shadow-medium;
+    z-index: 1000; 
+  }
+
+  // Estilos para a versão desktop
+  @media (min-width: 768px) {
+    position: relative;
+    width: 100%;
+  }
+
+  button {
+    height: 45px;
+    width: 50px;
+    border: 2px solid $color-text-light;
+    background-color: $color-text-dark;
+    color: $color-text-light;
+    border-radius: $border-radius-small;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  button:hover {
+    background-color: lighten($color-text-dark, 20%);
+    transform: scale(1.05);
+  }
+
+  button:active {
+    background-color: lighten($color-text-dark, 10%);
+    transform: scale(0.95);
+  }
+
+  button:disabled {
+    background-color: darken($color-text-dark, 10%);
+    color: $color-text-light;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  button.previous,
+  button.next {
+    width: 105px;
+    font-size: 14px;
+  }
+
+  button.number {
+    width: 50px;
+  }
+
+  button.active {
+    background-color: $color-text-light;
+    color: $color-text-dark;
+    border: 2px solid $color-text-dark;
+  }
+}

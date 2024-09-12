@@ -1,0 +1,32 @@
+.back-to-top {
+    position: fixed;
+    bottom: 50px; // Distância da parte inferior da tela
+    right: 50px; // Distância da borda direita da tela
+    z-index: 1000; // Certifica-se de que o botão fique acima de outros elementos
+  }
+  
+  .back-to-top-button {
+    background-color: $color-text-dark; // Cor de fundo preta
+    color: $color-text-light; // Cor do texto branca
+    border: 2px solid $color-text-light; // Borda branca
+    border-radius: 50%; // Faz o botão ser redondo
+    width: 50px; // Largura do botão
+    height: 50px; // Altura do botão
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 24px; // Tamanho da seta
+    transition: background-color 0.3s ease, transform 0.2s ease; // Efeito de hover e clique
+  }
+  
+  .back-to-top-button:hover {
+    background-color: lighten($color-text-dark, 20%); // Fundo mais claro no hover
+    transform: scale(1.1); // Leve aumento ao passar o mouse
+  }
+  
+  .back-to-top-button:active {
+    background-color: lighten($color-text-dark, 10%); // Fundo mais claro no clique
+    transform: scale(0.95); // Leve redução ao clicar
+  }
+  
