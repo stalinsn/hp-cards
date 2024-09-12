@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json}\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "lint-staged": {
     "*.{ts,js,tsx,jsx}": [
