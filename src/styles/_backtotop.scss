@@ -3,6 +3,9 @@
     bottom: 50px; // Distância da parte inferior da tela
     right: 50px; // Distância da borda direita da tela
     z-index: 1000; // Certifica-se de que o botão fique acima de outros elementos
+    @media(max-width: 767px){
+      right: 25px;
+    }
   }
   
   .back-to-top-button {

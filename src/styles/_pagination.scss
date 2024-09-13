@@ -35,6 +35,10 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-weight: bold;
     font-size: 14px;
+    @media (max-width: 767px) {
+      height: 25px;
+      width: 25px;
+    }
   }
 
   button:hover {
@@ -57,8 +61,22 @@
   button.previous,
   button.next {
     width: 105px;
-    font-size: 14px;
+    font-size: 14px;    
+    @media (max-width: 767px) {
+      width: 45px;
+      font-size: 0;
+    }
   }
+
+  button.previous:before {
+      content: '<';
+      font-size: 15px;
+  }
+
+  button.next:before {
+    content: '>';
+    font-size: 15px;    
+  }  
 
   button.number {
     width: 50px;
