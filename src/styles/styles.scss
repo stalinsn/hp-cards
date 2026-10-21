@@ -56,6 +56,12 @@ a {
   }
 }
 
+.api-error {
+  margin: 0 0 16px;
+  color: #ffb4ab;
+  text-align: center;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
