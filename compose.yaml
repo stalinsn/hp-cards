@@ -1,0 +1,36 @@
+services:
+  hp-cards:
+    image: hp-cards:nyxrooms
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_BASE_PATH: /hp-cards
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+    networks:
+      - ingress
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=live-rooms-ingress
+      - traefik.http.routers.hp-cards.rule=Host(`nyxrooms.com`) && (Path(`/hp-cards`) || PathPrefix(`/hp-cards/`))
+      - traefik.http.routers.hp-cards.entrypoints=websecure
+      - traefik.http.routers.hp-cards.tls.certresolver=live-rooms
+      - traefik.http.routers.hp-cards.priority=50
+      - traefik.http.routers.hp-cards.service=hp-cards
+      - traefik.http.services.hp-cards.loadbalancer.server.port=3000
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/hp-cards/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 45s
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  ingress:
+    name: live-rooms-ingress
+    external: true
