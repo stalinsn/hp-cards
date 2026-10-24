@@ -1,11 +1,11 @@
-@import 'design-system';
+@import "design-system";
 
 // Estilos da lista de personagens
 .container .character-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: $spacing-lg; 
+  gap: $spacing-lg;
 }
 
 // Estilos do card de personagem
@@ -16,7 +16,7 @@
   perspective: 1000px; // Define a perspectiva para o efeito de flip
   cursor: pointer;
   position: relative;
-  margin: $spacing-md; 
+  margin: $spacing-md;
   border-radius: $border-radius-small;
   box-shadow: $shadow-medium;
 }
@@ -78,15 +78,22 @@
 
 // Placeholder para quando a imagem não estiver disponível
 .container .character-card .image-placeholder {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="220" height="320" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="28" rx="3" stroke="%23FFFFFF" stroke-width="2"/><circle cx="12" cy="8" r="4" fill="%23000000"/><path d="M6 18c0-3 3-5 6-5s6 2 6 5" fill="%23000000"/></svg>');
-  width: 220px;
-  max-width: 220px;
+  width: 240px;
+  max-width: 100%;
   height: 320px;
-  max-height: 320px;
-  background-size: 180px; /* Reduz o tamanho do avatar */
-  background-position: center; /* Centraliza o avatar */
-  background-repeat: no-repeat;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 2px solid currentColor;
+  border-radius: 4px;
+
+  .avatar-initials {
+    font-size: 64px;
+    font-weight: bold;
+  }
 }
 
 // Estilos do contêiner de informações
@@ -140,4 +147,15 @@
 .no-house .card-back {
   background-color: $color-no-house;
   color: $color-text-light;
+}
+
+.container .character-card:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container .character-card .card-inner {
+    transition: none;
+  }
 }

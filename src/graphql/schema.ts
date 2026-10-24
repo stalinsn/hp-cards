@@ -1,4 +1,5 @@
-import { makeExecutableSchema } from '@graphql-tools/schema';
+import type { HpApiCharacter } from "../types/characters";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 
 // Definindo o schema com todos os campos traduzidos para português
 const typeDefs = `
@@ -40,62 +41,63 @@ const typeDefs = `
 // Função para buscar dados da API externa e mapear para o schema
 // Função para buscar dados da API externa e mapear para o schema
 const fetchCharactersFromAPI = async () => {
-    try {
-      const response = await fetch('https://hp-api.onrender.com/api/characters');
-  
-      // Verifica se a resposta da API é bem-sucedida
-      if (!response.ok) {
-        throw new Error(`Erro na API: ${response.status} - ${response.statusText}`);
-      }
-  
-      const characters = await response.json();
-  
-      // Mapeia os dados para o schema GraphQL
-      return characters.map((character: any) => ({
-        id: character.id,
-        nome: character.name,
-        nomes_alternativos: character.alternate_names,
-        especie: character.species,
-        genero: character.gender,
-        casa: character.house,
-        dataDeNascimento: character.dateOfBirth,
-        anoDeNascimento: character.yearOfBirth,
-        bruxo: character.wizard,
-        ancestralidade: character.ancestry,
-        corDosOlhos: character.eyeColour,
-        corDoCabelo: character.hairColour,
-        varinha: {
-          madeira: character.wand.wood,
-          nucleo: character.wand.core,
-          comprimento: character.wand.length,
-        },
-        patrono: character.patronus,
-        estudanteDeHogwarts: character.hogwartsStudent,
-        staffDeHogwarts: character.hogwartsStaff,
-        ator: character.actor,
-        atores_alternativos: character.alternate_actors,
-        vivo: character.alive,
-        imagem: character.image,
-      }));
-    } catch (error) {
-      // Verificação para garantir que o erro é um objeto com uma propriedade 'message'
-      if (error instanceof Error) {
-        console.error('Erro ao buscar personagens da API:', error.message);
-      } else {
-        console.error('Erro ao buscar personagens da API:', error);
-      }
-      return [];
+  try {
+    const response = await fetch("https://hp-api.onrender.com/api/characters");
+
+    // Verifica se a resposta da API é bem-sucedida
+    if (!response.ok) {
+      throw new Error(
+        `Erro na API: ${response.status} - ${response.statusText}`
+      );
     }
-  };
-  
+
+    const characters: HpApiCharacter[] = await response.json();
+
+    // Mapeia os dados para o schema GraphQL
+    return characters.map((character: HpApiCharacter) => ({
+      id: character.id,
+      nome: character.name,
+      nomes_alternativos: character.alternate_names,
+      especie: character.species,
+      genero: character.gender,
+      casa: character.house,
+      dataDeNascimento: character.dateOfBirth,
+      anoDeNascimento: character.yearOfBirth,
+      bruxo: character.wizard,
+      ancestralidade: character.ancestry,
+      corDosOlhos: character.eyeColour,
+      corDoCabelo: character.hairColour,
+      varinha: {
+        madeira: character.wand?.wood,
+        nucleo: character.wand?.core,
+        comprimento: character.wand?.length,
+      },
+      patrono: character.patronus,
+      estudanteDeHogwarts: character.hogwartsStudent,
+      staffDeHogwarts: character.hogwartsStaff,
+      ator: character.actor,
+      atores_alternativos: character.alternate_actors,
+      vivo: character.alive,
+      imagem: character.image,
+    }));
+  } catch (error) {
+    // Verificação para garantir que o erro é um objeto com uma propriedade 'message'
+    if (error instanceof Error) {
+      console.error("Erro ao buscar personagens da API:", error.message);
+    } else {
+      console.error("Erro ao buscar personagens da API:", error);
+    }
+    return [];
+  }
+};
 
 // Definindo resolvers para as queries
 const resolvers = {
   Query: {
     personagens: async () => await fetchCharactersFromAPI(),
-    personagem: async (parent: any, args: any) => {
+    personagem: async (_parent: unknown, args: { id: string }) => {
       const characters = await fetchCharactersFromAPI();
-      return characters.find((character: any) => character.id === args.id);
+      return characters.find((character) => character.id === args.id);
     },
   },
 };

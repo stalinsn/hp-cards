@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface Personagem {
   id?: string;
@@ -16,22 +16,35 @@ interface Personagem {
 
 interface CharacterCardBackProps {
   character: Personagem;
+  hidden?: boolean;
 }
 
-const CharacterCardBack: React.FC<CharacterCardBackProps> = ({ character }) => {
+const CharacterCardBack: React.FC<CharacterCardBackProps> = ({
+  character,
+  hidden,
+}) => {
   return (
-    <div className="card-back">
+    <div className="card-back" aria-hidden={hidden}>
       <h2>{character.nome}</h2>
       {character.especie && <p>Espécie: {character.especie}</p>}
       {character.genero && <p>Gênero: {character.genero}</p>}
-      {character.bruxo !== undefined && <p>Bruxo: {character.bruxo ? 'Sim' : 'Não'}</p>}
-      {character.vivo !== undefined && <p>Vivo: {character.vivo ? 'Sim' : 'Não'}</p>}
+      {character.bruxo !== undefined && (
+        <p>Bruxo: {character.bruxo ? "Sim" : "Não"}</p>
+      )}
+      {character.vivo !== undefined && (
+        <p>Vivo: {character.vivo ? "Sim" : "Não"}</p>
+      )}
       {character.varinha && (
         <div>
           <h3>Varinha:</h3>
-          <p>Madeira: {character.varinha.madeira || 'Desconhecido'}</p>
-          <p>Núcleo: {character.varinha.nucleo || 'Desconhecido'}</p>
-          <p>Comprimento: {character.varinha.comprimento ? `${character.varinha.comprimento} cm` : 'Desconhecido'}</p>
+          <p>Madeira: {character.varinha.madeira || "Desconhecido"}</p>
+          <p>Núcleo: {character.varinha.nucleo || "Desconhecido"}</p>
+          <p>
+            Comprimento:{" "}
+            {character.varinha.comprimento
+              ? `${character.varinha.comprimento} cm`
+              : "Desconhecido"}
+          </p>
         </div>
       )}
     </div>

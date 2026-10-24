@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface PaginationProps {
   currentPage: number;
@@ -6,7 +6,13 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}) => {
+  if (totalPages <= 1) return null;
+
   const getPageNumbers = () => {
     const pages = [];
 
@@ -24,7 +30,11 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
     }
 
     // Adiciona as páginas de duas para frente da atual, caso existam
-    for (let i = currentPage + 1; i <= Math.min(totalPages - 1, currentPage + 2); i++) {
+    for (
+      let i = currentPage + 1;
+      i <= Math.min(totalPages - 1, currentPage + 2);
+      i++
+    ) {
       pages.push(i);
     }
 
@@ -38,7 +48,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
   };
 
   const handlePageClick = (page: number | string) => {
-    if (typeof page === 'number' && page !== currentPage) {
+    if (typeof page === "number" && page !== currentPage) {
       onPageChange(page);
     }
   };
@@ -47,37 +57,37 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 
   return (
     <div className="pagination">
-  {/* Botão "Anterior" */}
-  <button
-    className="previous"
-    onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-    disabled={currentPage === 1}
-  >
-    Anterior
-  </button>
+      {/* Botão "Anterior" */}
+      <button
+        className="previous"
+        onClick={() => onPageChange(Math.max(1, currentPage - 1))}
+        disabled={currentPage <= 1}
+      >
+        Anterior
+      </button>
 
-  {/* Números de páginas */}
-  {pageNumbers.map((page, index) => (
-    <button
-      key={index}
-      onClick={() => handlePageClick(page)}
-      className={page === currentPage ? 'active' : ''}
-      disabled={typeof page === 'string'}
-    >
-      {page}
-    </button>
-  ))}
+      {/* Números de páginas */}
+      {pageNumbers.map((page, index) => (
+        <button
+          key={index}
+          onClick={() => handlePageClick(page)}
+          className={page === currentPage ? "active" : ""}
+          aria-current={page === currentPage ? "page" : undefined}
+          disabled={typeof page === "string"}
+        >
+          {page}
+        </button>
+      ))}
 
-  {/* Botão "Próximo" */}
-  <button
-    className="next"
-    onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-    disabled={currentPage === totalPages}
-  >
-    Próximo
-  </button>
-</div>
-
+      {/* Botão "Próximo" */}
+      <button
+        className="next"
+        onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
+        disabled={currentPage >= totalPages}
+      >
+        Próximo
+      </button>
+    </div>
   );
 };
 
